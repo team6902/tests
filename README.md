@@ -25,8 +25,10 @@ A NavX está funcionando corretamente no USB, mas o ideal é utilizar ela na I2C
 Tente conectar na expansão MXP da RoboRIo conforme o tutorial (cuidado com as entradas GNC e 5V):
 https://pdocs.kauailabs.com/navx-micro/installation/roborio-installation/
 
-Para testar use este código: https://github.com/team6902/tests/tree/master/navx_i2c_0301 e abra o __ShuffleBoard__ 
+Para testar use este código: https://github.com/team6902/tests/tree/master/navx_i2c_0301 e abra o __ShuffleBoard__ para ver se os dados são atualizados.
 
-## Testar duas wewbcans
+## Testar duas webcans
 
-Colocar duas webcams e verificar
+Colocar duas webcams e verificar se aparece no __ShuffleBoard__.
+Utilizar o código: https://github.com/team6902/tests/tree/master/cameraserver_1101 
+
