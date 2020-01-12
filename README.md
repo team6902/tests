@@ -9,11 +9,13 @@
 	- [x] USB;
 	- [ ] I2C;
 - [ ] Testar duas webcams;
-https://github.com/PseudoResonance/Pixy2JavaAPI/wiki/Wiring-the-Pixy2-to-a-RoboRIO
+
+
 ## Testar Pixy
 
-https://docs.pixycam.com/wiki/doku.php?id=wiki:v2:porting_guide
-https://andymark-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTkvMDcvMTIvMTQvMjUvNDgvOTc0MGNkOGItMmRlOS00Mjc4LWFlYzEtMmY0ZGUyMGI1Y2NhL1BpeHlDYW0gU1BJIEluc3RydWN0aW9ucy5wZGYiXV0/PixyCam%20SPI%20Instructions.pdf?sha=e16096fe11ed8b61
+- https://github.com/PseudoResonance/Pixy2JavaAPI/wiki/Wiring-the-Pixy2-to-a-RoboRIO
+- https://docs.pixycam.com/wiki/doku.php?id=wiki:v2:porting_guide
+- https://andymark-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTkvMDcvMTIvMTQvMjUvNDgvOTc0MGNkOGItMmRlOS00Mjc4LWFlYzEtMmY0ZGUyMGI1Y2NhL1BpeHlDYW0gU1BJIEluc3RydWN0aW9ucy5wZGYiXV0/PixyCam%20SPI%20Instructions.pdf?sha=e16096fe11ed8b61
 
 ### Wiring Pixy
 
@@ -26,6 +28,9 @@ https://bitbucket.org/Zelda_Programming/bagelbots-frc702-2016/src/7b59b8264d5f7b
 
 Descobrir como utilizar o encoder do motor Neverest Gearmotor.
 https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/encoder/Robot.java
+
+Olhe o exemplo do encoder. Alguns parâmetros devem ser alterados para medir corretamente.
+Teste primeiro com estes valores, algum valor é mostrado no shuffleboard?
 
 ## Testar NavX
 
