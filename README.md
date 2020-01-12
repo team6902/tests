@@ -9,10 +9,18 @@
 	- [x] USB;
 	- [ ] I2C;
 - [ ] Testar duas webcams;
-
+https://github.com/PseudoResonance/Pixy2JavaAPI/wiki/Wiring-the-Pixy2-to-a-RoboRIO
 ## Testar Pixy
 
-Deixar para outro dia.
+https://docs.pixycam.com/wiki/doku.php?id=wiki:v2:porting_guide
+https://andymark-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTkvMDcvMTIvMTQvMjUvNDgvOTc0MGNkOGItMmRlOS00Mjc4LWFlYzEtMmY0ZGUyMGI1Y2NhL1BpeHlDYW0gU1BJIEluc3RydWN0aW9ucy5wZGYiXV0/PixyCam%20SPI%20Instructions.pdf?sha=e16096fe11ed8b61
+
+### Wiring Pixy
+
+https://github.com/PseudoResonance/Pixy2JavaAPI/wiki/Wiring-the-Pixy2-to-a-RoboRIO
+
+### Pixy I2C
+https://bitbucket.org/Zelda_Programming/bagelbots-frc702-2016/src/7b59b8264d5f7bd92b96b963d95ff9a6d8643000/2016%20FIRST%20Stronghold%20Robot%20Code/src/org/usfirst/frc/team702/robot/PixyCmu5.java?at=master&fileviewer=file-view-default
 
 ## Testar encoder do motor;
 
@@ -26,6 +34,10 @@ Tente conectar na expansão MXP da RoboRIo conforme o tutorial (cuidado com as e
 https://pdocs.kauailabs.com/navx-micro/installation/roborio-installation/
 
 Para testar use este código: https://github.com/team6902/tests/tree/master/navx_i2c_0301 e abra o __ShuffleBoard__ para ver se os dados são atualizados.
+
+### Outros exemplos
+
+https://pdocs.kauailabs.com/navx-micro/
 
 ## Testar duas webcans
 
