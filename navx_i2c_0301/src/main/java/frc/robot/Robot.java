@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
        * 
        * Multiple navX-model devices on a single robot are supported.
        ************************************************************************/
-      ahrs = new AHRS(SerialPort.Port.kMXP);
+      ahrs = new AHRS(I2C.Port.kOnboard);
       // ahrs = new AHRS(SerialPort.Port.kMXP, SerialDataType.kProcessedData,
       // (byte)50);
       ahrs.enableLogging(true);
@@ -65,20 +65,27 @@ public class Robot extends TimedRobot {
     Timer.delay(1.0);
     // UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
     // cam.setResolution(640, 480);
+
+    new Thread(() -> {
+      while (true) {
+        Timer.delay(0.02);
+        update();
+      }
+    }).start();
   }
+  
+  private void update() {
+  //   System.out.print(" x=" + ahrs.getRawGyroX());
+  //   System.out.print(" y=" + ahrs.getRawGyroY());
+  //   System.out.println(" z=" + ahrs.getRawGyroZ());
+    // System.out.println(ahrs.);
 
-  /**
-   * Display navX MXP Sensor Data on Smart Dashboard
-   */
-  public void robotPeriodic() {
-    System.out.println(ahrs.getAngle());
+    // Timer.delay(0.020); /* wait for one motor update time period (50Hz) */
 
-    Timer.delay(0.020); /* wait for one motor update time period (50Hz) */
-
-    boolean zero_yaw_pressed = stick.getTrigger();
-    if (zero_yaw_pressed) {
-      ahrs.zeroYaw();
-    }
+    // boolean zero_yaw_pressed = stick.getTrigger();
+    // if (zero_yaw_pressed) {
+    //   ahrs.zeroYaw();
+    // }
 
     /* Display 6-axis Processed Angle Data */
     SmartDashboard.putBoolean("IMU_Connected", ahrs.isConnected());
@@ -158,6 +165,13 @@ public class Robot extends TimedRobot {
     /* Connectivity Debugging Support */
     SmartDashboard.putNumber("IMU_Byte_Count", ahrs.getByteCount());
     SmartDashboard.putNumber("IMU_Update_Count", ahrs.getUpdateCount());
+  }
+
+  /**
+   * Display navX MXP Sensor Data on Smart Dashboard
+   */
+  public void robotPeriodic() {
+    
   }
 
   /**

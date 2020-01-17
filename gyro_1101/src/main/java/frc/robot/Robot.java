@@ -11,6 +11,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -33,9 +34,10 @@ public class Robot extends TimedRobot {
   // private static final double kVoltsPerDegreePerSecond = 0.0128;
 
   // ToDo: verificar portas
-  private static final int kLeftMotorPort = 0;
-  private static final int kRightMotorPort = 8;
+  private static final int kLeftMotorPort = 9;
+  private static final int kRightMotorPort = 0;
   private static final int kJoystickPort = 0;
+  double turningValue = 0;
 
   private final DifferentialDrive m_myRobot
       = new DifferentialDrive(new Spark(kLeftMotorPort),
@@ -46,7 +48,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     try {
-      ahrs = new AHRS(SerialPort.Port.kUSB1);
+      // ahrs = new AHRS(SerialPort.Port.kUSB1);
+      ahrs = new AHRS(I2C.Port.kOnboard);
       // ahrs = new AHRS(SerialPort.Port.kMXP, SerialDataType.kProcessedData,
       // (byte)50);
       ahrs.enableLogging(true);
@@ -57,21 +60,35 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if (m_joystick.getRawButton(0)) {
+    if (m_joystick.getRawButton(1)) {
       this.angleSetpoint = 0;
     }
-    if (m_joystick.getRawButton(1)) {
+    if (m_joystick.getRawButton(2)) {
       this.angleSetpoint = 90;
     }
-    if (m_joystick.getRawButton(2)) {
+    if (m_joystick.getRawButton(3)) {
       this.angleSetpoint = 180;
     }
-    if (m_joystick.getRawButton(3)) {
+    if (m_joystick.getRawButton(4)) {
       this.angleSetpoint = 270;
     }
-    double turningValue = (this.angleSetpoint - ahrs.getAngle()) * kP;
+    turningValue = (this.angleSetpoint - ahrs.getYaw()) * kP;
     // Invert the direction of the turn if we are going backwards
-    turningValue = Math.copySign(turningValue, m_joystick.getY());
-    m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
+    // turningValue = Math.copySign(turningValue, -m_joystick.getY());
+    
+    double vel = -m_joystick.getY();
+    if (vel > .2) vel = .2;
+    else if (vel < -.2) vel = -.2;
+    m_myRobot.arcadeDrive(vel, turningValue);
+
+    // ToDo: remover, apenas teste inicial:
+  }
+
+  @Override
+  public void robotPeriodic() {
+    System.out.printf("Angle=%2.2f Turning Value=%2.2f Setpoint=%2.2f\n",
+                      ahrs.getYaw(),
+                      turningValue,
+                      angleSetpoint);
   }
 }
