@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.frc.AHRS.SerialDataType;
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    // ahrs = new AHRS(I2C.Port.kOnboard);
     try {
       // ahrs = new AHRS(SerialPort.Port.kUSB1);
       ahrs = new AHRS(I2C.Port.kOnboard);
@@ -80,12 +82,13 @@ public class Robot extends TimedRobot {
     if (vel > .2) vel = .2;
     else if (vel < -.2) vel = -.2;
     m_myRobot.arcadeDrive(vel, turningValue);
-
-    // ToDo: remover, apenas teste inicial:
   }
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Angle", ahrs.getYaw());
+    SmartDashboard.putNumber("Turning Value", turningValue);
+    SmartDashboard.putNumber("SetPoint", angleSetpoint);
     System.out.printf("Angle=%2.2f Turning Value=%2.2f Setpoint=%2.2f\n",
                       ahrs.getYaw(),
                       turningValue,
