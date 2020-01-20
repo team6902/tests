@@ -13,9 +13,8 @@ import frc.robot.Robot;
 
 public class TurnToAngle extends Command {
 
-  double cost = 0;  // For PIDs testing
-
   public TurnToAngle(double degrees) {
+    System.out.println("Turn to angle " + degrees);
     requires(Robot.m_drive);
     Robot.m_drive.getTurnController().setSetpoint(degrees);
     setTimeout(5.0);

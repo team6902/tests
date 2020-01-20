@@ -21,8 +21,7 @@ public class TankDriveWithJoystick extends Command {
 
   @Override
   protected void execute() {
-    // ToDo: Passar valores do joystick
-    // Robot.m_drive.drive(Robot.m_oi.stick.getY, Robot.m_oi.stick.getY);
+    Robot.m_drive.tankDrive(Robot.m_oi.stick1.getY(), Robot.m_oi.stick2.getY());
   }
 
   @Override

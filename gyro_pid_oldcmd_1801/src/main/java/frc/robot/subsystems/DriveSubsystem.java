@@ -20,7 +20,7 @@ import frc.robot.commands.TankDriveWithJoystick;
 
 public class DriveSubsystem extends Subsystem {
 
-  private static final double kTurnP = 0;
+  private static final double kTurnP = 0.01;
   private static final double kTurnI = 0;
   private static final double kTurnD = 0;
 
@@ -34,7 +34,7 @@ public class DriveSubsystem extends Subsystem {
   private double xSpeed, zRotation = 0;
 
   public DriveSubsystem() {
-    
+    this.m_pidTurnController.setSetpoint(0.0);
   }
 
   public double getHeading() {
@@ -61,7 +61,7 @@ public class DriveSubsystem extends Subsystem {
   }
 
   private void log() {
-    System.out.printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n", 
+    System.out.printf("%f,%f,%f,%f,%f,%f,%f,%f,%f,%b\n", 
                       Robot.m_timer.get(),
                       this.m_pidTurnController.getP(),
                       this.m_pidTurnController.getI(),
@@ -70,6 +70,7 @@ public class DriveSubsystem extends Subsystem {
                       this.m_gyro.getAngle(),
                       this.xSpeed,
                       this.zRotation,
+                      this.m_pidTurnController.getSetpoint(),
                       this.m_pidTurnController.atSetpoint());
   }
 

@@ -26,9 +26,12 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
  * backwards while the gyro is used for direction keeping.
  */
 public class Robot extends TimedRobot {
+
   AHRS ahrs;
-  private double angleSetpoint = 0.0;
-  private static final double kP = 0.005; // propotional turning constant
+  double P = .005;
+  double D = .0003;
+  double I = .005;
+  double integral, previous_error, error, setpoint, derivative, rcw = 0;  
 
   // gyro calibration constant, may need to be adjusted;
   // gyro value of 360 is set to correspond to one full revolution
@@ -39,6 +42,14 @@ public class Robot extends TimedRobot {
   private static final int kRightMotorPort = 0;
   private static final int kJoystickPort = 0;
   double turningValue = 0;
+
+  public void PID(){
+    error = setpoint - ahrs.pidGet(); // Error = Target - Actual
+    this.integral += (error*.02);
+    derivative = (error - this.previous_error) / .02;
+    this.rcw = P*error + I*this.integral + D*derivative;
+    this.previous_error = error;
+  }
 
   private final DifferentialDrive m_myRobot
       = new DifferentialDrive(new Spark(kLeftMotorPort),
@@ -63,35 +74,40 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (m_joystick.getRawButton(1)) {
-      this.angleSetpoint = 0;
+      this.setpoint = 0;
     }
     if (m_joystick.getRawButton(2)) {
-      this.angleSetpoint = 90;
+      this.setpoint = 90;
     }
     if (m_joystick.getRawButton(3)) {
-      this.angleSetpoint = 180;
+      this.setpoint = 170;
     }
-    if (m_joystick.getRawButton(4)) {
-      this.angleSetpoint = 270;
+    if (m_joystick.getRawButton(5)) {
+      this.setpoint = -90;
     }
-    turningValue = (this.angleSetpoint - ahrs.getYaw()) * kP;
-    // Invert the direction of the turn if we are going backwards
-    // turningValue = Math.copySign(turningValue, -m_joystick.getY());
-    
     double vel = -m_joystick.getY();
-    if (vel > .2) vel = .2;
-    else if (vel < -.2) vel = -.2;
-    m_myRobot.arcadeDrive(vel, turningValue);
+    
+    // if (vel > .2) vel = .2;
+    // else if (vel < -.2) vel = -.2;
+    PID();
+    if (rcw > .5) rcw = .5;
+    else if (rcw < .5) rcw = -.5;
+    m_myRobot.arcadeDrive(vel, rcw);
   }
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Angle", ahrs.getYaw());
-    SmartDashboard.putNumber("Turning Value", turningValue);
-    SmartDashboard.putNumber("SetPoint", angleSetpoint);
-    System.out.printf("Angle=%2.2f Turning Value=%2.2f Setpoint=%2.2f\n",
-                      ahrs.getYaw(),
-                      turningValue,
-                      angleSetpoint);
+    SmartDashboard.putNumber("dTurning Value", rcw);
+    SmartDashboard.putString("Angle", ahrs.pidGet() + "");
+    
+    SmartDashboard.putNumber("pid", ahrs.pidGet());
+    SmartDashboard.putString("setpoint", setpoint + "");
+    // SmartDashboard.putString("Turning Value", turningValue + "");
+    // SmartDashboard.putNumber("dTurning Value", turningValue);
+    // SmartDashboard.putString("SetPoint", angleSetpoint + "");
+    // System.out.printf("Angle=%2.2f Turning Value=%2.2f Setpoint=%2.2f\n",
+    //                   ahrs.getAngle(),
+    //                   turningValue,
+    //                   angleSetpoint);
   }
 }
