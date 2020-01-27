@@ -93,8 +93,8 @@ public class Robot extends TimedRobot {
   
   @Override
   public void autonomousPeriodic() {
-    if (m_encoder.getDistance() < 1) m_motor.set(.1);
-    else m_motor.set(0);
+    if (m_encoder.getDistance() < 6.79) m_motor.set(.2);
+    else if (m_encoder.getDistance() >= 6.791) m_motor.set(0);
   }
 
   @Override
