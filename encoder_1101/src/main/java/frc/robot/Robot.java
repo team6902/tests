@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.Talon;
  * autonomous mode.
  */
 public class Robot extends TimedRobot {
+  
   /**
    * The Encoder object is constructed with 4 parameters, the last two being optional. The first two
    * parameters (1, 2 in this case) refer to the ports on the roboRIO which the encoder uses.
@@ -39,9 +40,9 @@ public class Robot extends TimedRobot {
    * rate.
    */
   private final Encoder m_encoder =
-      new Encoder(1, 2, false, CounterBase.EncodingType.k4X);
+      new Encoder(0, 1, false, CounterBase.EncodingType.k4X);
 
-  private static final int kMotorPort = 2;
+  private static final int kMotorPort = 5;
   private static final int kJoystickPort = 0;
 
   private SpeedController m_motor;
@@ -65,8 +66,9 @@ public class Robot extends TimedRobot {
      * attached to a 3 inch diameter (1.5inch radius) wheel,
      * and that we want to measure distance in inches.
      */
-    m_encoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
+    // m_encoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
 
+    m_encoder.setDistancePerPulse(1/(double) 7);
     /*
      * Defines the lowest rate at which the encoder will
      * not be considered stopped, for the purposes of
@@ -80,8 +82,24 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_motor.set(m_joystick.getY());
-    System.out.println(m_encoder.getDistance());
     SmartDashboard.putNumber("Encoder Distance", m_encoder.getDistance());
     SmartDashboard.putNumber("Encoder Rate", m_encoder.getRate());
   }
+
+  @Override
+  public void autonomousInit() {
+    m_encoder.reset();
+  }
+  
+  @Override
+  public void autonomousPeriodic() {
+    if (m_encoder.getDistance() < 1) m_motor.set(.1);
+    else m_motor.set(0);
+  }
+
+  @Override
+  public void robotPeriodic() {
+    System.out.println(m_encoder.getDistance());
+  }
+  
 }
