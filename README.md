@@ -40,13 +40,13 @@ Utilizar o código: https://github.com/team6902/tests/tree/master/cameraserver_1
 
 ## Notas
 
-Chamaleon
-	https://chameleon-vision.readthedocs.io/
-TUtoriais
-	https://www.2035.rocks/resources/documents/FRCVisionTargetingwithCMUPixy.pdf
-Exemplos
-	https://github.com/fauge7/TowerTracker/blob/master/src/com/fauge/robotics/towertracker/TowerTracker.java
-	https://github.com/TheGuyWhoCodes/LiftTracker/blob/master/src/LiftTracker.java
-	https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
-	https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
+##### Chamaleon
+- https://chameleon-vision.readthedocs.io/
+#### TUtoriais
+- https://www.2035.rocks/resources/documents/FRCVisionTargetingwithCMUPixy.pdf
+#### Exemplos
+- https://github.com/fauge7/TowerTracker/blob/master/src/com/fauge/robotics/towertracker/TowerTracker.java
+- https://github.com/TheGuyWhoCodes/LiftTracker/blob/master/src/LiftTracker.java
+- https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
+- https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
 
