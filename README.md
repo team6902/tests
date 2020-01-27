@@ -1,16 +1,5 @@
 # Teste de componentes
 
-# ToDo
-
-- [ ] Testar Pixy;
-- [x] Testar ultrassônico e infravermelho;
-- [ ] Testar encoder do motor;
-- [ ] Testar NavX;
-	- [x] USB;
-	- [ ] I2C;
-- [ ] Testar duas webcams;
-
-
 ## Testar Pixy
 
 - https://github.com/PseudoResonance/Pixy2JavaAPI/wiki/Wiring-the-Pixy2-to-a-RoboRIO
@@ -48,4 +37,16 @@ https://pdocs.kauailabs.com/navx-micro/
 
 Colocar duas webcams e verificar se aparece no __ShuffleBoard__.
 Utilizar o código: https://github.com/team6902/tests/tree/master/cameraserver_1101 
+
+## Notas
+
+Chamaleon
+	https://chameleon-vision.readthedocs.io/
+TUtoriais
+	https://www.2035.rocks/resources/documents/FRCVisionTargetingwithCMUPixy.pdf
+Exemplos
+	https://github.com/fauge7/TowerTracker/blob/master/src/com/fauge/robotics/towertracker/TowerTracker.java
+	https://github.com/TheGuyWhoCodes/LiftTracker/blob/master/src/LiftTracker.java
+	https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
+	https://github.com/otri3d/2019-Vision/tree/master/python-multiCameraServer
 
