@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
-
+ 
 /**
  * Sample program displaying the value of a quadrature encoder on the SmartDashboard. Quadrature
  * Encoders are digital sensors which can detect the amount the encoder has rotated since starting
@@ -82,6 +82,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_motor.set(m_joystick.getY());
+    if (m_joystick.getRawButton(0)) m_encoder.reset();
     SmartDashboard.putNumber("Encoder Distance", m_encoder.getDistance());
     SmartDashboard.putNumber("Encoder Rate", m_encoder.getRate());
   }
@@ -93,8 +94,11 @@ public class Robot extends TimedRobot {
   
   @Override
   public void autonomousPeriodic() {
-    if (m_encoder.getDistance() < 6.79) m_motor.set(.2);
-    else if (m_encoder.getDistance() >= 6.791) m_motor.set(0);
+    if (m_encoder.getDistance() < 50) m_motor.set(1);
+
+    if (m_encoder.getDistance() < 90) m_motor.set(.5);
+    else if (m_encoder.getDistance() > 105) m_motor.set(-.2);
+    else m_motor.set(0);
   }
 
   @Override
